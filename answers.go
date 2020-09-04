@@ -88,7 +88,7 @@ func constructContentResult(a []*pb.Content, o TPagination) (res string, pages [
 		case TBLOCK_IP:
 			bt = "\u274c (ip) "
 		}
-		res += fmt.Sprintf("%s /n\\_%d %s...\n", bt, content.Id, Sanitize(content.Description))
+		res += fmt.Sprintf("%s /n\\_%d %s\n", bt, content.Id, Sanitize(content.Description))
 		res += fmt.Sprintf("внесено: %s\n", time.Unix(content.IncludeTime, 0).Format("2006-01-02"))
 		res += "\n"
 		cnt := 0
