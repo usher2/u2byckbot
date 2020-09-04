@@ -297,7 +297,11 @@ func constructResult(a []*pb.Content, o TPagination) (res string, pages []TPagin
 				bt = "\u274c "
 				cbi++
 			}
-			res += fmt.Sprintf("%s /n\\_%d %s...\n", bt, content.Id, Sanitize(string([]rune(content.Description)[:127])))
+			_l := len(content.Description)
+			if _l > 127 {
+				_l = 127
+			}
+			res += fmt.Sprintf("%s /n\\_%d %s...\n", bt, content.Id, Sanitize(string([]rune(content.Description)[:_l])))
 			if len(req.Ip) != 0 {
 				for _, ip := range req.Ip {
 					res += fmt.Sprintf("    _как ip_ %s\n", ip)
