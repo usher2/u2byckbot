@@ -25,8 +25,8 @@ const PRINT_LIMIT = 5
 const MAX_TIMESTAMP int64 = 1<<63 - 1
 
 const (
-	DTIME12 = 12 * 60 * 60
-	DTIME3  = 3 * 60 * 60
+	DTIME72 = 72 * 60 * 60
+	DTIME36 = 36 * 60 * 60
 )
 
 const (
@@ -52,9 +52,9 @@ func printUpToDate(t int64) string {
 	var r rune
 	d := time.Now().Unix() - t
 	switch {
-	case d > DTIME12:
+	case d > DTIME72:
 		r = 0x2b55
-	case d > DTIME3:
+	case d > DTIME36:
 		r = 0x000026a0
 	default:
 		r = 0x2705
