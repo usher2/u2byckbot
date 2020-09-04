@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+message IDRequest {
+        int32 query = 1;
+}
+
+message IP4Request {
+        uint32 query = 1;
+}
+
+message URLRequest {
+        string query = 1;
+}
+
+message DomainRequest {
+        string query = 1;
+}
+
+message SearchResponse {
+        string error = 1;
+        int64 registryUpdateTime = 2;
+        repeated Content results = 3;
+}
+
+message StatRequest {
+        string query = 1;
+}
+
+message StatResponse {
+        string error = 1;
+        bytes stats = 2;
+}
+
+message PingRequest {
+        string ping = 1;
+}
+
+message PongResponse {
+        string error = 1;
+        int64 registryUpdateTime = 2;
+        string pong = 3;
+}
+
+service Check {
+  rpc SearchID (IDRequest) returns (SearchResponse);
+  rpc SearchIP4 (IP4Request) returns (SearchResponse);
+  rpc SearchURL (URLRequest) returns (SearchResponse);
+  rpc SearchDomain (DomainRequest) returns (SearchResponse);
+  rpc Stat (StatRequest) returns (StatResponse);
+  rpc Ping (PingRequest) returns (PongResponse);
+}
+
+message Content {
+        int32 id = 1;
+        int64 registryUpdateTime = 2;
+        int32 blockType = 3;
+        uint32 ip4 = 4;
+        string domain = 5;
+        string url = 6;
+        bytes pack = 7;
+}
+
