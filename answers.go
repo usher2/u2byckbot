@@ -88,7 +88,7 @@ func constructContentResult(a []*pb.Content, o TPagination) (res string, pages [
 		case TBLOCK_IP:
 			bt = "\u274c (ip) "
 		}
-		res += fmt.Sprintf("%s /n\\_%d %s...\n", bt, content.Id, content.Description)
+		res += fmt.Sprintf("%s /n\\_%d %s...\n", bt, content.Id, Sanitize(content.Description))
 		res += fmt.Sprintf("внесено: %s\n", time.Unix(content.IncludeTime, 0).Format("2006-01-02"))
 		res += "\n"
 		cnt := 0
@@ -297,7 +297,7 @@ func constructResult(a []*pb.Content, o TPagination) (res string, pages []TPagin
 				bt = "\u274c "
 				cbi++
 			}
-			res += fmt.Sprintf("%s /n\\_%d %s...\n", bt, content.Id, string([]rune(content.Description)[:127]))
+			res += fmt.Sprintf("%s /n\\_%d %s...\n", bt, content.Id, Sanitize(string([]rune(content.Description)[:127])))
 			if len(req.Ip) != 0 {
 				for _, ip := range req.Ip {
 					res += fmt.Sprintf("    _как ip_ %s\n", ip)
