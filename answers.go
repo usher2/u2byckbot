@@ -297,7 +297,7 @@ func constructResult(a []*pb.Content, o TPagination) (res string, pages []TPagin
 				bt = "\u274c "
 				cbi++
 			}
-			_l := len(content.Description)
+			_l := len([]rune(content.Description))
 			if _l > 127 {
 				_l = 127
 			}
