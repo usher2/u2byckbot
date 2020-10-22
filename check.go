@@ -275,27 +275,25 @@ func mainSearch(c pb.CheckClient, s string, o TPagination) (res string, pages []
 		fallthrough
 	case _ur == nil:
 		if _u.Scheme != "https" && _u.Scheme != "http" {
-			utime, a, err = searchURL(c, s)
+			utime, a2, err = searchURL(c, s)
 		} else {
 			_u.Scheme = "https"
-			utime, a, err = searchURL(c, _u.String())
+			utime, a2, err = searchURL(c, _u.String())
 			if err == nil {
+				if len(a2) > 0 {
+					a = append(a, a2...)
+				}
 				if utime < oldest {
 					oldest = utime
 				}
 				_u.Scheme = "http"
 				utime, a2, err = searchURL(c, _u.String())
-				if err == nil {
-					if utime < oldest {
-						oldest = utime
-					}
-					if len(a2) > 0 {
-						a = append(a, a2...)
-					}
-				}
 			}
 		}
 		if err == nil {
+			if len(a2) > 0 {
+				a = append(a, a2...)
+			}
 			if utime < oldest {
 				oldest = utime
 			}
