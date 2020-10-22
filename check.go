@@ -272,6 +272,7 @@ func mainSearch(c pb.CheckClient, s string, o TPagination) (res string, pages []
 			_res, pages = constructResult(a, o)
 			res += _res
 		}
+		fallthrough
 	case _ur == nil:
 		if _u.Scheme != "https" && _u.Scheme != "http" {
 			utime, a, err = searchURL(c, s)
