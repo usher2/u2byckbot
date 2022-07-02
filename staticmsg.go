@@ -37,12 +37,9 @@ const (
 		"только для ознакомления. Также в Беларуси не существует рекомендаций по способам блокировок. " +
 		"Мы позволили себе интерпретировать виды блокировок самостоятельно, опираясь на российский опыт"
 
-	DonateMessage string = "\u2600 *Пожертвования по подписке:*\n" +
-		"https://www.patreon.com/usher2\n\n" +
-		"\U00002b50 *Традиционные способы:*\n" +
+	DonateMessage string = "\U00002b50 *Традиционные способы:*\n" +
 		"PayPal: https://www.paypal.me/schors\n" +
-		"Яндекс.Деньги: http://yasobe.ru/na/schors\n" +
-		"WMP: P603777732896\n" +
+		"Яндекс.Деньги: https://sobe.ru/na/m2i2s077M0g2\n" +
 		"WMZ: Z991867115444\n" +
 		"WME: E261636674470\n" +
 		"WMX: X862559021665\n\n" +
@@ -55,12 +52,7 @@ const (
 		"BCH: 1FiXmPZ6eecHVaZbgdadAuzQLU9kqdSzVN\n" +
 		"ETC: 0xeb990a29d4f870b5fdbe331db90d9849ce3dae77\n" +
 		"WAX: 0xba53cebd99157bf412a6bb91165e7dff29abd0a2\n\n" +
-		"\U00002708 *Бонусные программы:*\n" +
-		"Аэрофлот-бонус: 1045433852\n" +
-		"S7-бонус: 929102200\n\n" +
-		"\U0001f36d Мой вишлист: http://mywishlist.ru/me/schors\n\n" +
-		"\U00002708 *Игрушки:*\n" +
-		"World of Warships: Phil\\_Kulin\n"
+		"\U0001f36d Мой вишлист: http://mywishlist.ru/me/schors\n\n"
 
 	Footer string = "" /*"--- \n" +
 	"Часть проекта @usher2\n\n" /*+
