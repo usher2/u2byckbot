@@ -39,7 +39,6 @@ const (
 		"Бот проверки росcийских блокировок Роскомнадзора: https://t.me/u2ckbot"
 
 	DonateMessage string = "\U00002b50 *Традиционные способы:*\n" +
-		"PayPal: https://www.paypal.me/schors\n" +
 		"Яндекс.Деньги: https://sobe.ru/na/m2i2s077M0g2\n" +
 		"WMZ: Z991867115444\n" +
 		"WME: E261636674470\n" +
