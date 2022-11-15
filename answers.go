@@ -81,7 +81,7 @@ func constructContentResult(a []*pb.Content, o TPagination) (res string, pages [
 		content := TContent{}
 		err := json.Unmarshal(packet.Pack, &content)
 		if err != nil {
-			fmt.Printf("Упс!!! %s\n", err)
+			Error.Printf("Упс!!! %s\n", err)
 			continue
 		}
 		if packet.RegistryUpdateTime < oldest {
