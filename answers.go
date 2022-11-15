@@ -12,14 +12,6 @@ import (
 	pb "github.com/usher2/u2byckdump/msg"
 )
 
-const (
-	TBLOCK_UNKNOWN = iota
-	TBLOCK_URL
-	TBLOCK_HTTPS
-	TBLOCK_DOMAIN
-	TBLOCK_IP
-)
-
 const encodeCorc = "abcdefghjkmnpqrstvwxyz0123456789"
 
 const PRINT_LIMIT = 5
@@ -89,7 +81,7 @@ func constructContentResult(a []*pb.Content, o TPagination) (res string, pages [
 		content := TContent{}
 		err := json.Unmarshal(packet.Pack, &content)
 		if err != nil {
-			Error.Printf("Упс!!! %s\n", err)
+			fmt.Printf("Упс!!! %s\n", err)
 			continue
 		}
 		if packet.RegistryUpdateTime < oldest {
@@ -106,7 +98,7 @@ func constructContentResult(a []*pb.Content, o TPagination) (res string, pages [
 		case TBLOCK_IP:
 			bt = "\u274c (ip) "
 		}
-		res += fmt.Sprintf("%s /n\\_%s %s\n", bt, Uint64ToBase32(content.U2Hash), Sanitize(content.Description))
+		res += fmt.Sprintf("%s /n\\_%s %s %s\n", bt, Uint64ToBase32(content.U2Hash), Sanitize(content.Decision), Sanitize(content.DecisionInfo))
 		res += fmt.Sprintf("внесено: %s\n", time.Unix(content.IncludeTime, 0).Format("2006-01-02"))
 		res += "\n"
 		cnt := 0
@@ -315,11 +307,11 @@ func constructResult(a []*pb.Content, o TPagination) (res string, pages []TPagin
 				bt = "\u274c "
 				cbi++
 			}
-			_l := len([]rune(content.Description))
+			_l := len([]rune(content.Decision))
 			if _l > 127 {
 				_l = 127
 			}
-			res += fmt.Sprintf("%s /n\\_%s %s...\n", bt, Uint64ToBase32(content.U2Hash), Sanitize(string([]rune(content.Description)[:_l])))
+			res += fmt.Sprintf("%s /n\\_%s %s...\n", bt, Uint64ToBase32(content.U2Hash), Sanitize(string([]rune(content.Decision)[:_l])))
 			if len(req.Ip) != 0 {
 				for _, ip := range req.Ip {
 					res += fmt.Sprintf("    _как ip_ %s\n", ip)

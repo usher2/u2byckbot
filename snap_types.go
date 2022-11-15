@@ -1,5 +1,13 @@
 package main
 
+const (
+	TBLOCK_UNKNOWN = iota
+	TBLOCK_URL
+	TBLOCK_HTTPS
+	TBLOCK_DOMAIN
+	TBLOCK_IP
+)
+
 type TMinContent struct {
 	Id                 int32
 	BlockType          int32 // for protobuf
@@ -12,14 +20,15 @@ type TMinContent struct {
 }
 
 type TContent struct {
-	Id          int32     `json:"id"`
-	Description string    `json:"d"` // info
-	IncludeTime int64     `json:"it"`
-	Url         []TUrl    `json:"url,omitempty"`
-	Ip4         []TIp4    `json:"ip4,omitempty"`
-	Domain      []TDomain `json:"dm,omitempty"`
-	HttpsBlock  int       `json:"hb"`
-	U2Hash      uint64    `json:"u2h"`
+	Id           int32     `json:"id"`
+	Decision     string    `json:"d"`
+	DecisionInfo string    `json:"di"`
+	IncludeTime  int64     `json:"it"`
+	Url          []TUrl    `json:"url,omitempty"`
+	Ip4          []TIp4    `json:"ip4,omitempty"`
+	Domain       []TDomain `json:"dm,omitempty"`
+	HttpsBlock   int       `json:"hb"`
+	U2Hash       uint64    `json:"u2h"`
 }
 
 type TDomain struct {
