@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"net"
 	"net/url"
-	"strconv"
 	"strings"
 	"time"
 
@@ -28,11 +27,11 @@ func Ping(c pb.CheckClient) string {
 	return fmt.Sprintf("\U0001f919 *%s*%s", r.Pong, printUpToDate(r.RegistryUpdateTime))
 }
 
-func searchID(c pb.CheckClient, id int) (int64, []*pb.Content, error) {
+func searchID(c pb.CheckClient, id uint64) (int64, []*pb.Content, error) {
 	Info.Printf("Looking for content: #%d\n", id)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	r, err := c.SearchID(ctx, &pb.IDRequest{Query: int32(id)})
+	r, err := c.SearchID(ctx, &pb.IDRequest{Query: id})
 	if err != nil {
 		Debug.Printf("%v.SearchContent(_) = _, %v\n", c, err)
 		return MAX_TIMESTAMP, nil, fmt.Errorf("\U00002620 Что-то пошло не так! Повторите попытку позже\n")
@@ -135,7 +134,7 @@ func numberSearch(c pb.CheckClient, s string, o TPagination) (res string, pages 
 		res = "\U0001f914 Что имелось ввиду?..\n"
 		return
 	}
-	n, err := strconv.Atoi(s)
+	n, err := Base32ToUint64(s)
 	switch {
 	case err == nil && n != 0:
 		utime, a, err = searchID(c, n)

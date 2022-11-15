@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/base32"
+	"encoding/binary"
 	"encoding/json"
 	"fmt"
 	"sort"
@@ -48,6 +50,22 @@ type TReason struct {
 	Domain []string
 }
 
+func Uint64ToBase32(i uint64) string {
+	b32 := base32.NewEncoding(encodeCorc).WithPadding(base32.NoPadding)
+	b := make([]byte, 8)
+	binary.LittleEndian.PutUint64(b, i)
+	return b32.EncodeToString(b)
+}
+
+func Base32ToUint64(s string) (uint64, error) {
+	b32 := base32.NewEncoding(encodeCorc).WithPadding(base32.NoPadding)
+	b, err := b32.DecodeString(s)
+	if err == nil {
+		return binary.LittleEndian.Uint64(b), nil
+	}
+	return 0, err
+}
+
 func printUpToDate(t int64) string {
 	var r rune
 	d := time.Now().Unix() - t
@@ -88,7 +106,7 @@ func constructContentResult(a []*pb.Content, o TPagination) (res string, pages [
 		case TBLOCK_IP:
 			bt = "\u274c (ip) "
 		}
-		res += fmt.Sprintf("%s /n\\_%d %s\n", bt, content.Id, Sanitize(content.Description))
+		res += fmt.Sprintf("%s /n\\_%s %s\n", bt, Uint64ToBase32(content.U2Hash), Sanitize(content.Description))
 		res += fmt.Sprintf("внесено: %s\n", time.Unix(content.IncludeTime, 0).Format("2006-01-02"))
 		res += "\n"
 		cnt := 0
@@ -301,7 +319,7 @@ func constructResult(a []*pb.Content, o TPagination) (res string, pages []TPagin
 			if _l > 127 {
 				_l = 127
 			}
-			res += fmt.Sprintf("%s /n\\_%d %s...\n", bt, content.Id, Sanitize(string([]rune(content.Description)[:_l])))
+			res += fmt.Sprintf("%s /n\\_%s %s...\n", bt, Uint64ToBase32(content.U2Hash), Sanitize(string([]rune(content.Description)[:_l])))
 			if len(req.Ip) != 0 {
 				for _, ip := range req.Ip {
 					res += fmt.Sprintf("    _как ip_ %s\n", ip)
