@@ -9,7 +9,7 @@ import (
 
 	tb "github.com/go-telegram-bot-api/telegram-bot-api"
 
-	pb "github.com/usher2/u2byckbot/msg"
+	pb "github.com/usher2/u2byckdump/msg"
 )
 
 func botUpdates(c pb.CheckClient, bot *tb.BotAPI, updatesChan tb.UpdatesChannel) {

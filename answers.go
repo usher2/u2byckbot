@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	pb "github.com/usher2/u2byckbot/msg"
+	pb "github.com/usher2/u2byckdump/msg"
 )
 
 const (

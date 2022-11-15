@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	pb "github.com/usher2/u2byckbot/msg"
+	pb "github.com/usher2/u2byckdump/msg"
 )
 
 func Ping(c pb.CheckClient) string {

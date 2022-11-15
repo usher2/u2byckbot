@@ -1,4 +1,3 @@
-//go:generate protoc -I msg --go-grpc_out=msg --go_out=msg --go_opt=paths=source_relative --go-grpc_opt=paths=source_relative msg/msg.proto
 package main
 
 import (
@@ -12,7 +11,7 @@ import (
 
 	tb "github.com/go-telegram-bot-api/telegram-bot-api"
 
-	pb "github.com/usher2/u2byckbot/msg"
+	pb "github.com/usher2/u2byckdump/msg"
 	"google.golang.org/grpc"
 )
 
